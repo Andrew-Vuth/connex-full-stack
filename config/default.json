@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://andrew:andrewvuth16@oneschool-db.qmrun.mongodb.net/Database?retryWrites=true&w=majority",
+  "jwtSecret": "OneSchool_Secret"
+}

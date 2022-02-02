@@ -26,6 +26,7 @@ const upload = multer({ storage, fileFilter });
 // @desc      Updating Profile
 // @access    Private
 router.put("/:id", auth, upload.single("profileImage"), async (req, res) => {
+  console.log("got it");
   const { name, username, major, interests, bio } = req.body;
   const profileImage = req.file ? req.file.path : req.body.profileImage;
   const profileFields = {};
@@ -55,7 +56,13 @@ router.put("/:id", auth, upload.single("profileImage"), async (req, res) => {
     res.json({ user });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ msg: "Server Error" });
+    let msg;
+    if (error.message.includes("dup key")) {
+      msg = "Username is already taken";
+    } else {
+      msg = "Server Error";
+    }
+    res.status(500).json({ msg: msg });
   }
 });
 
